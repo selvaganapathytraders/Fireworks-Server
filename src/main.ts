@@ -6,7 +6,7 @@ async function bootstrap() {
 
   // Enable CORS - adjust the origin to your frontend URL or use '*' for development only
   app.enableCors({
-    origin: 'https://fireworks-seven-gilt.vercel.app/', // change this to your frontend URL
+    origin: 'https://fireworks-five-gamma.vercel.app/', // change this to your frontend URL
     methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true, // if you use cookies or sessions, otherwise optional
