@@ -19,7 +19,7 @@ export class MailService {
     const transporter = this.createTransporter();
 
     const mailOptions = {
-      from: `"Vishwa Fireworks" <${process.env.SENDER_EMAIL}>`,
+      from: `"Selvaganapathy Fireworks" <${process.env.SENDER_EMAIL}>`,
       to,
       subject: 'Confirming your order!',
       text: 'Please find the attached PDF.',
@@ -47,9 +47,9 @@ export class MailService {
     const transporter = this.createTransporter();
 
     const mailOptions = {
-      from: `"Vishwa Fireworks" <${process.env.SENDER_EMAIL}>`,
+      from: `"Selvaganapathy Fireworks" <${process.env.SENDER_EMAIL}>`,
       to: email,
-      subject: 'Your Login OTP - Vishwa Fireworks',
+      subject: 'Your Login OTP - Selvaganapathy Fireworks',
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <h2 style="color: #333;">Login Verification</h2>
@@ -60,7 +60,7 @@ export class MailService {
           <p style="color: #666;">This OTP will expire in 5 minutes.</p>
           <p style="color: #666;">If you didn't request this OTP, please ignore this email.</p>
           <hr style="border: none; border-top: 1px solid #eee; margin: 20px 0;">
-          <p style="color: #999; font-size: 12px;">© Vishwa Fireworks</p>
+          <p style="color: #999; font-size: 12px;">© Selvaganapathy Fireworks</p>
         </div>
       `,
     };
