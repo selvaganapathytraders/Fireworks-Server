@@ -21,12 +21,44 @@ export class MailService {
     const mailOptions = {
       from: `"Selvaganapathy Fireworks" <${process.env.SENDER_EMAIL}>`,
       to,
-      subject: 'Confirming your order!',
-      text: 'Please find the attached PDF.',
+      subject: 'Order Confirmation - Selvaganapathy Fireworks',
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+          <!-- Header -->
+          <div style="background-color: #f8f9fa; padding: 20px; text-align: center; border-radius: 8px; margin-bottom: 20px;">
+            <h1 style="margin: 0; color: #333; font-size: 24px;">Selvaganapathy Fireworks</h1>
+          </div>
+          
+          <!-- Content -->
+          <div style="background-color: white; padding: 20px; border: 1px solid #e9ecef; border-radius: 8px;">
+            <h2 style="color: #333; margin-bottom: 20px;">Order Confirmation</h2>
+            
+            <p style="color: #666; margin-bottom: 20px;">
+              Thank you for your order. Please find your invoice attached.
+            </p>
+            
+            <div style="background-color: #f8f9fa; padding: 15px; border-radius: 6px; margin: 20px 0;">
+              <p style="margin: 0; color: #666;">
+                <strong>Date:</strong> ${new Date().toLocaleDateString('en-IN')}
+              </p>
+            </div>
+            
+            <p style="color: #666; margin-top: 20px;">
+              Thank you for choosing us.
+            </p>
+          </div>
+          
+          <!-- Footer -->
+          <div style="text-align: center; padding: 20px; color: #999; font-size: 12px;">
+            <p style="margin: 0;">© ${new Date().getFullYear()} Selvaganapathy Fireworks</p>
+          </div>
+        </div>
+      `,
       attachments: [
         {
-          filename: file.originalname,
+          filename: file.originalname || 'invoice.pdf',
           content: file.buffer,
+          contentType: 'application/pdf'
         },
       ],
     };
@@ -49,18 +81,38 @@ export class MailService {
     const mailOptions = {
       from: `"Selvaganapathy Fireworks" <${process.env.SENDER_EMAIL}>`,
       to: email,
-      subject: 'Your Login OTP - Selvaganapathy Fireworks',
+      subject: 'Login OTP - Selvaganapathy Fireworks',
       html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-          <h2 style="color: #333;">Login Verification</h2>
-          <p>Your OTP for login is:</p>
-          <div style="background-color: #f0f0f0; padding: 20px; text-align: center; margin: 20px 0;">
-            <h1 style="color: #007bff; font-size: 32px; margin: 0; letter-spacing: 5px;">${otp}</h1>
+        <div style="font-family: Arial, sans-serif; max-width: 500px; margin: 0 auto; padding: 20px;">
+          <!-- Header -->
+          <div style="background-color: #f8f9fa; padding: 20px; text-align: center; border-radius: 8px; margin-bottom: 20px;">
+            <h1 style="margin: 0; color: #333; font-size: 24px;">Selvaganapathy Fireworks</h1>
           </div>
-          <p style="color: #666;">This OTP will expire in 5 minutes.</p>
-          <p style="color: #666;">If you didn't request this OTP, please ignore this email.</p>
-          <hr style="border: none; border-top: 1px solid #eee; margin: 20px 0;">
-          <p style="color: #999; font-size: 12px;">© Selvaganapathy Fireworks</p>
+          
+          <!-- Content -->
+          <div style="background-color: white; padding: 20px; border: 1px solid #e9ecef; border-radius: 8px; text-align: center;">
+            <h2 style="color: #333; margin-bottom: 20px;">Login Verification</h2>
+            
+            <p style="color: #666; margin-bottom: 30px;">
+              Your OTP code:
+            </p>
+            
+            <!-- OTP Code -->
+            <div style="background-color: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
+              <div style="font-size: 32px; font-weight: bold; color: #333; letter-spacing: 4px;">
+                ${otp}
+              </div>
+            </div>
+            
+            <p style="color: #999; font-size: 14px;">
+              Valid for 5 minutes
+            </p>
+          </div>
+          
+          <!-- Footer -->
+          <div style="text-align: center; padding: 20px; color: #999; font-size: 12px;">
+            <p style="margin: 0;">© ${new Date().getFullYear()} Selvaganapathy Fireworks</p>
+          </div>
         </div>
       `,
     };
