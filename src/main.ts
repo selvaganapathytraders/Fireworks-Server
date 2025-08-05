@@ -1,23 +1,32 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 
+let cachedServer: any = null;
+
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  // Enable CORS - adjust the origin to your frontend URL or use '*' for development only
   app.enableCors({
     origin: [
-    'https://fireworks-five-gamma.vercel.app',
-    'https://fireworks-five-gamma.vercel.app/',
-    'http://localhost:5173' // for local development
-  ],// change this to your frontend URL
+      'https://fireworks-five-gamma.vercel.app',
+      'https://fireworks-five-gamma.vercel.app/',
+      'http://localhost:5173'
+    ],
     methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true, // if you use cookies or sessions, otherwise optional
+    credentials: true,
   });
 
-  const port = process.env.PORT || 3000;
-  await app.listen(port, '0.0.0.0');
-  console.log(`Application is running on: http://0.0.0.0:${port}`);
+  await app.init();
+
+  const expressApp = app.getHttpAdapter().getInstance();
+  return expressApp;
 }
-bootstrap();
+
+// No typing as Handler here—just (req, res)
+export default async (req: any, res: any) => {
+  if (!cachedServer) {
+    cachedServer = await bootstrap();
+  }
+  return cachedServer(req, res);
+};
