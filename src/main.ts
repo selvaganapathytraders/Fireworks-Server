@@ -8,9 +8,8 @@ async function bootstrap() {
 
   app.enableCors({
     origin: [
-      'https://fireworks-five-gamma.vercel.app',
-      'https://fireworks-five-gamma.vercel.app/',
-      'http://localhost:5173'
+      'http://localhost:5173',
+      'https://fireworks-wine.vercel.app'
     ],
     methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
@@ -18,12 +17,10 @@ async function bootstrap() {
   });
 
   await app.init();
-
-  const expressApp = app.getHttpAdapter().getInstance();
-  return expressApp;
+  return app.getHttpAdapter().getInstance();
 }
 
-// No typing as Handler here—just (req, res)
+// The ONLY correct export for Vercel:
 export default async (req: any, res: any) => {
   if (!cachedServer) {
     cachedServer = await bootstrap();
